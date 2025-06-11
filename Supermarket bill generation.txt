@@ -1,0 +1,65 @@
+from datetime import datetime
+# Define products and prices (can be loaded from a database or file)
+products={
+    "apple": 20,
+    "banana": 50,
+    "mango": 10,
+    "pineapple": 70,
+    "jack fruit": 20,
+}
+# Cart: items bought and their quantities
+cart={
+    "banana":2,
+    "jack fruit":4,
+    "pine appple":3,
+}
+def generate_bill(cart,products,tax_rate=0.07):
+    print("="*40)
+    print("          Yashwanth Supermarket")
+    print("        Bill Receipt")
+    print("="*40)
+    print("Date:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print("-"*40)
+    print("{:<15} {:<5} {:<7} {:<7}".format("Item", "Qty", "Price", "Total"))
+    print("-"*40)
+    subtotal=0
+    for item, qty in cart.items():
+        price = products.get(item, 0)
+        total = price * qty
+        subtotal += total
+        print("{:<15} {:<5} {:<7.2f} {:<7.2f}".format(item, qty, price, total))
+        
+        tax = subtotal * tax_rate
+        grand_total = subtotal + tax
+        print("-"*40)
+    print("{:<28} {:<7.2f}".format("Subtotal", subtotal))
+    print("{:<28} {:<7.2f}".format("Tax (7%)", tax))
+    print("{:<28} {:<7.2f}".format("Grand Total", grand_total))
+    print("="*40)
+    print("Thank you for shopping with us!")
+    print("="*40)
+generate_bill(cart,products)
+
+
+OUTPUT:
+
+========================================
+          Yashwanth Supermarket
+        Bill Receipt
+========================================
+Date: 2025-06-11 05:14:21
+----------------------------------------
+Item            Qty   Price   Total  
+----------------------------------------
+banana          2     50.00   100.00 
+----------------------------------------
+jack fruit      4     20.00   80.00  
+----------------------------------------
+pine appple     3     0.00    0.00   
+----------------------------------------
+Subtotal                     180.00 
+Tax (7%)                     12.60  
+Grand Total                  192.60 
+========================================
+Thank you for shopping with us!
+========================================
